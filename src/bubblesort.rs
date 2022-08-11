@@ -2,8 +2,8 @@ use super::Sorter;
 
 pub struct BubbleSort;
 
-impl Sorter for BubbleSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for BubbleSort {
+    fn sort(&self, slice: &mut [T])
     where
         T: Ord,
     {
@@ -23,10 +23,10 @@ impl Sorter for BubbleSort {
 #[test]
 fn bubblesort_works() {
     let mut v = vec![3, 2, 1];
-    BubbleSort::sort(&mut v);
+    BubbleSort.sort(&mut v);
     assert_eq!(v, vec![1, 2, 3]);
 
     let mut v = vec![3, 2, 1, 5];
-    BubbleSort::sort(&mut v);
+    BubbleSort.sort(&mut v);
     assert_eq!(v, vec![1, 2, 3, 5]);
 }

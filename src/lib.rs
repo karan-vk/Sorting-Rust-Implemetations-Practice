@@ -1,16 +1,16 @@
-trait Sorter {
-    fn sort<T>(slice: &mut [T])
+pub trait Sorter<T> {
+    fn sort(&self, slice: &mut [T])
     where
         T: Ord;
 }
 
-fn sort<T, S>(slice: &mut [T])
-where
-    T: Ord,
-    S: Sorter,
-{
-    S::sort(slice)
-}
+// fn sort<T, S>(slice: &mut [T])
+// where
+//     T: Ord,
+//     S: Sorter<T>,
+// {
+//     S::sort(slice)
+// }
 
 mod bubblesort;
 mod insertionsort;
@@ -20,8 +20,8 @@ mod tests {
     use super::*;
 
     struct StdSorter;
-    impl Sorter for StdSorter {
-        fn sort<T>(slice: &mut [T])
+    impl<T> Sorter<T> for StdSorter {
+        fn sort(&self, slice: &mut [T])
         where
             T: Ord,
         {
@@ -32,11 +32,7 @@ mod tests {
     #[test]
     fn std_works() {
         let mut v = vec![3, 2, 1];
-        sort::<_, StdSorter>(&mut v);
+        StdSorter.sort(&mut v);
         assert_eq!(v, vec![1, 2, 3]);
     }
-
-    
-
-    
 }
