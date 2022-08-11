@@ -19,7 +19,6 @@ impl<T> Sorter<T> for InsertionSort {
             } else {
                 let i = match slice[..unsorted].binary_search(&slice[unsorted]) {
                     Ok(i) => i,
-
                     Err(i) => i,
                 };
                 slice[i..=unsorted].rotate_right(1);
